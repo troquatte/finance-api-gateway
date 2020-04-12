@@ -3,7 +3,7 @@ const User = use('App/Models/User');
 
 class UserController {
   async create({request, response}){
-    const { username, email, password } = request.all();
+    const { username, email, password } = request.body;
 
     //Find Email
     const findEmail = await User.query().where("email", email).first();
@@ -12,7 +12,7 @@ class UserController {
     if(findEmail){
       return response.status(404).json({
         status: 404,
-        result: "E-mail já existente tente outro!"
+        response: "E-mail já existente tente outro!"
       });
     };
 
@@ -24,7 +24,7 @@ class UserController {
 
     return response.status(200).json({
       status: 200,
-      result: "Conta criada com sucesso!"
+      response: "Conta criada com sucesso!"
     })
 
   }

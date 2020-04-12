@@ -21,9 +21,11 @@ class GateWayBalanceController {
 
   async read({request, response, auth}){
     const users_id = await this.getAuthUsers.userId({auth});
+    const { page, tag, prev_date, curr_date }   = request.body;
+
     //Response axios Data
     const res = await axios.post(`${Env.get('ROUTE_BALANCE')}/read`, {
-      "users_id": users_id
+      "users_id": users_id, page, tag, prev_date, curr_date
     });
 
     return res.data

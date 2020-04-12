@@ -31,14 +31,14 @@ class GatWayExpenseController {
     }
 
     //Response axios Data
-    const res = await axios.get(`${Env.get('ROUTE_EXPENSE')}/read`, { payload });
+    const res = await axios.post(`${Env.get('ROUTE_EXPENSE')}/read/`, { payload });
 
     return res.data
   }
 
   async update({request, response, auth}){
     const users_id = await this.getAuthUsers.userId({auth});
-    const req = request.body;
+    const req = request.body.payload;
 
     const payload = {
       id: request.params.id,
@@ -51,6 +51,7 @@ class GatWayExpenseController {
 
     return res.data
   }
+
   async delete({request, response, auth}){
     const users_id = await this.getAuthUsers.userId({auth});
 

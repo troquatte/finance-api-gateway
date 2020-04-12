@@ -16,10 +16,6 @@
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route')
 
-Route.get('/', () => {
-  return { greeting: 'Hello world in JSON' }
-})
-
 //Group Router Accounts: Create and Sessions
 Route.group(() => {
   Route.post('create', 'UserController.create');
@@ -28,7 +24,7 @@ Route.group(() => {
 
 //Group Router Balance: Create and Update
 Route.group(() => {
-  Route.get('/read', 'GateWayBalanceController.read')
+  Route.post('/read', 'GateWayBalanceController.read')
   Route.post('/create-or-update', 'GateWayBalanceController.createOrUpdate')
 }).prefix('/balance').middleware('auth');
 
@@ -43,5 +39,5 @@ Route.group(() => {
 
 //Group Router Expenses: Create, Read, Update and Delete
 Route.group(() => {
-  Route.get('/data-list-paginator/', 'GatWayDataExpController.dataListPaginator')
+  Route.get('/data-list-paginator', 'GatWayDataExpController.dataListPaginator')
 }).prefix('/data-exp').middleware('auth');
